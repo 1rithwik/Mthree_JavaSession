@@ -1,4 +1,4 @@
-package com.cache.datastructures;
+package sep_25.datastructures;
 
 import java.util.Scanner;
 

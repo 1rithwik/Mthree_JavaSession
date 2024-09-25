@@ -1,6 +1,6 @@
 package LibraryManagement;
 
-public class Book {
+public abstract class Book {
     private String bookId;
     private String title;
     private String author;
@@ -35,13 +35,7 @@ public class Book {
         return isAvailable;
     }
 
-    public void borrowBook() {
-        if (isAvailable) {
-            isAvailable = false;
-        } else {
-            System.out.println("The book is currently unavailable.");
-        }
-    }
+    public abstract void borrowBook();
 
     public void returnBook() {
         isAvailable = true;

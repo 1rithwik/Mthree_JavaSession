@@ -8,34 +8,18 @@ public class AppSystem {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        // Library library = new Library();
-
-        // User user1 = new User("1", "John Doe", "john.doe@example.com");
-        // library.addUser(user1);
-
-        // Book book1 = new Book("1", "The Great Gatsby", "F. Scott Fitzgerald");
-        // Book book2 = new Book("2", "To Kill a Mockingbird", "Harper Lee");
-        // library.addBook(book1);
-        // library.addBook(book2);
-
-        // // Borrow a book
-        // LocalDate borrowDate = LocalDate.now();
-        // Transaction transaction = new Transaction("T1", user1.getUserId(),
-        // book1.getBookId(), borrowDate);
-        // System.out.println("Book borrowed: " + book1.getTitle() + " by " +
-        // user1.getName());
-
-        // // Return a book
-        // LocalDate returnDate = borrowDate.plusDays(14);
-        // transaction.setReturnDate(returnDate);
-        // System.out.println("Book returned: " + book1.getTitle() + " by " +
-        // user1.getName());
 
         Library library = new Library(); // Library instance created here
 
         // Sample data
-        library.addBook(new Book("1", "The Great Gatsby", "F. Scott Fitzgerald", "123456789"));
-        library.addBook(new Book("2", "1_9_8_4", "George Orwell", "987654321"));
+        library.addBook(new EBook("1", "The Great Gatsby", "F. Scott Fitzgerald", "123456789", "www.downloadlink.com"));
+        library.addBook(new PrintedBook("2", "1_9_8_4", "George Orwell", "987654321", "Shelf A3"));
+        // Adding an eBook
+        EBook ebook = new EBook("1", "Digital Fortress", "Dan Brown", "123456789", "www.downloadlink.com");
+        library.addBook(ebook);
+        // Adding a Printed Book
+        PrintedBook printedBook = new PrintedBook("2", "Harry Potter", "J.K. Rowling", "987654321", "Shelf A3");
+        library.addBook(printedBook);
         // Menu interaction
         System.out.println("Welcome to the Library Management System");
         while (true) {
@@ -74,8 +58,19 @@ public class AppSystem {
                     String author = sc.nextLine();
                     System.out.print("Enter ISBN: ");
                     String isbn = sc.nextLine();
-                    Book newBook = new Book(bookId, title, author, isbn);
-                    library.addBook(newBook);
+                    System.out.print("Is it an eBook or a Printed Book? (e/p): ");
+                    String type = sc.nextLine();
+                    if (type.equalsIgnoreCase("e")) {
+                        System.out.print("Enter download link: ");
+                        String downloadLink = sc.nextLine();
+                        Book newBook = new EBook(bookId, title, author, isbn, downloadLink);
+                        library.addBook(newBook);
+                    } else if (type.equalsIgnoreCase("p")) {
+                        System.out.print("Enter shelf location: ");
+                        String shelfLocation = sc.nextLine();
+                        Book newBook = new PrintedBook(bookId, title, author, isbn, shelfLocation);
+                        library.addBook(newBook);
+                    }
                     System.out.println("Book added!");
                     break;
 

@@ -5,23 +5,38 @@ import java.util.*;
 
 public class Library {
     private List<Book> books;
+    private List<EBook> ebooks;
+    private List<PrintedBook> printedBooks;
     private List<User> users;
 
     public Library() {
         this.books = new ArrayList<>();
+        this.ebooks = new ArrayList<>();
+        this.printedBooks = new ArrayList<>();
         this.users = new ArrayList<>();
     }
 
     // methods to add, remove, and find books
     public void addBook(Book book) {
-        for (Book b : books) {
-            if (b.getIsbn().equals(book.getIsbn())) {
-                System.out.println("Book with the same ISBN already exists.");
-                return;
+        if (book instanceof EBook) {
+            for (EBook b : ebooks) {
+                if (b.getIsbn().equals(book.getIsbn())) {
+                    System.out.println("Book with the same ISBN already exists.");
+                    return;
+                }
             }
+            ebooks.add((EBook) book);
+        } else if (book instanceof PrintedBook) {
+            for (PrintedBook b : printedBooks) {
+                if (b.getIsbn().equals(book.getIsbn())) {
+                    System.out.println("Book with the same ISBN already exists.");
+                    return;
+                }
+            }
+            printedBooks.add((PrintedBook) book);
         }
-        books.add(book);
         System.out.println("Book added successfully!");
+        books.add(book);
     }
 
     public boolean removeBook(String isbn) {
