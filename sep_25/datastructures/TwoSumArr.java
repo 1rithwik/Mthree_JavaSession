@@ -3,11 +3,25 @@ package sep_25.datastructures;
 import java.util.*;
 
 public class TwoSumArr {
-    public static void twoSum(HashMap<Integer, Integer> map, int target) {
+    static void fun1(HashMap<Integer, Integer> map, int target) {
         for (int i : map.keySet()) {
             int complement = target - i;
             if (map.containsKey(complement)) {
                 System.out.println("The indices are " + map.get(i) + " and " + map.get(complement));
+            }
+        }
+    }
+
+    static void fun2(int[] arr, int target) {
+        Arrays.sort(arr);
+        int l = 0, r = arr.length - 1;
+        while (l < r) {
+            if (arr[l] + arr[r] == target) {
+                System.out.println("The indices are " + l + " and " + r);
+            } else if (arr[l] + arr[r] > target) {
+                r--;
+            } else {
+                l++;
             }
         }
     }
@@ -23,7 +37,8 @@ public class TwoSumArr {
         }
         System.out.println("Enter the target sum");
         int target = sc.nextInt();
-        twoSum(map, target);
+        fun1(map, target);
+        fun2(null, target);
         sc.close();
     }
 
